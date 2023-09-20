@@ -60,14 +60,11 @@ To run NGKast locally on your machine, follow these steps:
 
 ## Contributing
 
-We welcome contributions from the open-source community. If you'd like to contribute to NGKast, please follow our [Contribution Guidelines](CONTRIBUTING.md).
+We welcome contributions from the open-source community. If you'd like to contribute to NGKast, please follow the Contribution Guidelines.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
-For questions or feedback, please contact the NGKast development team at [contact@ngkast.com](mailto:contact@ngkast.com).
+For questions or feedback, please contact the NGKast development team at [contact@ngkast.com](mailto:ngrifk@gmail.com).
 
 Thank you for using NGKast! Happy podcasting!

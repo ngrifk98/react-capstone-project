@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import "./LoginPage.css"; // Import the CSS file
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -17,6 +18,13 @@ const LoginPage = () => {
   const handleLogin = () => {
     // Implement login functionality here
     // You can use the 'username' and 'password' states to send a login request to your server
+
+    // Assuming login is successful, navigate to the homepage
+    // You can replace this with your actual login logic
+    if (username === "yourUsername" && password === "yourPassword") {
+      // Redirect to the homepage
+      navigate("/homepage"); // Replace "/homepage" with the actual path to your homepage
+    }
   };
 
   return (

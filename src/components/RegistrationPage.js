@@ -26,16 +26,15 @@ function RegistrationPage() {
 
     // Create an object with the registration data
     const registrationData = {
-      name: registration.name,
-      username: registration.username,
+      login_id: registration.login_id, 
+      user_name: registration.user_name,
       password: registration.password,
-      retypePassword: registration.retypePassword,
-      email: registration.email,
+      email_id: registration.email
     };
 
     try {
       // Send a POST request to your server with the registration data
-      const response = await fetch('http://localhost:3000/api/register', {
+      const response = await fetch('http://localhost:3000/registerApi', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,13 +47,13 @@ function RegistrationPage() {
         console.log('User registered successfully');
 
         // Optionally, you can reset the form fields after successful registration
-        setRegistration({
-          name: '',
-          username: '',
-          password: '',
-          retypePassword: '',
-          email: ''
-        });
+        // setRegistration({
+        //   name: '',
+        //   username: '',
+        //   password: '',
+        //   retypePassword: '',
+        //   email: ''
+        // });
 
         // You can also navigate the user to a success page or the login page
         navigate('/login');
@@ -73,22 +72,22 @@ function RegistrationPage() {
       <h2>Register for NGKast!</h2>
       <form className="registration-form" onSubmit={handleRegister}>
         <div className="form-group">
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="login_id">Login ID:</label>
           <input
             type="text"
-            id="name"
-            name="name" // Add the name attribute
-            value={registration.name}
+            id="login_id"
+            name="login_id" // Add the name attribute
+            value={registration.login_id}
             onChange={handleInput}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="username">Username/Login ID:</label>
+          <label htmlFor="user_name">Your Name:</label>
           <input
             type="text"
-            id="username"
-            name="username" // Add the name attribute
-            value={registration.username}
+            id="user_name"
+            name="user_name" // Add the name attribute
+            value={registration.user_name}
             onChange={handleInput}
           />
         </div>

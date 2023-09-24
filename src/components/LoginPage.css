@@ -52,3 +52,8 @@
     margin-top: 10px;
   }
   
+  .error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px; /* Optional spacing from other elements */
+  }

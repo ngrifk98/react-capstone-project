@@ -31,7 +31,7 @@ function LoginPage() {
 
     try {
       // Send a POST request to your server with the login data
-      const response = await fetch("http://localhost:3000/loginApi", {
+      const response = await fetch("/api/loginApi", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

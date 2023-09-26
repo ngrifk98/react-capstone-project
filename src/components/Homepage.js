@@ -23,7 +23,7 @@ function Homepage() {
     }
 
     // Fetch the user_name from the server when the component mounts
-    fetch("http://localhost:3000/api/NGKast") // Replace with your server endpoint
+    fetch("/api/NGKast") // Replace with your server endpoint
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -95,7 +95,7 @@ function Homepage() {
 
   return (
     <div className="homepage">
-      <h2>Welcome, {user_name || "Guest"} to NGKast</h2>
+      <h2 className="welcome-text">Welcome, {user_name || "Guest"} to NGKast</h2>
       <div className="search-bar">
         <input
           type="text"

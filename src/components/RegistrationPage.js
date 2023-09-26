@@ -4,12 +4,14 @@ import "./RegistrationPage.css";
 
 function RegistrationPage() {
   const [registration, setRegistration] = useState({
-    name: '',
-    username: '',
+    login_id: '',
+    user_name: '',
     password: '',
     retypePassword: '',
     email: ''
   });
+
+  const [error, setError] = useState(""); // State for error message
 
   const navigate = useNavigate();
 
@@ -22,7 +24,15 @@ function RegistrationPage() {
   };
 
   const handleRegister = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
+
+    // Check for empty fields
+    for (const key in registration) {
+      if (registration[key] === "") {
+        setError(`Please fill out ${key.replace("_", " ")}`);
+        return;
+      }
+    }
 
     // Create an object with the registration data
     const registrationData = {
@@ -46,16 +56,19 @@ function RegistrationPage() {
         // User registered successfully, you can handle this as needed
         console.log('User registered successfully');
 
-        // Optionally, you can reset the form fields after successful registration
-        // setRegistration({
-        //   name: '',
-        //   username: '',
-        //   password: '',
-        //   retypePassword: '',
-        //   email: ''
-        // });
+        // Reset the form fields after successful registration
+        setRegistration({
+          login_id: '',
+          user_name: '',
+          password: '',
+          retypePassword: '',
+          email: ''
+        });
 
-        // You can also navigate the user to a success page or the login page
+        // Clear the error message
+        setError("");
+
+        // Navigate the user to a success page or the login page
         navigate('/login');
       } else {
         // Handle registration failure
@@ -64,7 +77,6 @@ function RegistrationPage() {
     } catch (error) {
       console.error('Error registering user:', error);
     }
-    
   };
 
   return (
@@ -76,7 +88,7 @@ function RegistrationPage() {
           <input
             type="text"
             id="login_id"
-            name="login_id" // Add the name attribute
+            name="login_id"
             value={registration.login_id}
             onChange={handleInput}
           />
@@ -86,7 +98,7 @@ function RegistrationPage() {
           <input
             type="text"
             id="user_name"
-            name="user_name" // Add the name attribute
+            name="user_name"
             value={registration.user_name}
             onChange={handleInput}
           />
@@ -96,7 +108,7 @@ function RegistrationPage() {
           <input
             type="password"
             id="password"
-            name="password" // Add the name attribute
+            name="password"
             value={registration.password}
             onChange={handleInput}
           />
@@ -106,7 +118,7 @@ function RegistrationPage() {
           <input
             type="password"
             id="retypePassword"
-            name="retypePassword" // Add the name attribute
+            name="retypePassword"
             value={registration.retypePassword}
             onChange={handleInput}
           />
@@ -116,17 +128,17 @@ function RegistrationPage() {
           <input
             type="email"
             id="email"
-            name="email" // Add the name attribute
+            name="email"
             value={registration.email}
             onChange={handleInput}
           />
         </div>
+        {error && <p className="error-message">{error}</p>}
         <button type="submit">Register</button>
       </form>
       <p>
-        Already have an account? <Link to="/login">Login here</Link>{" "}
-        {/* Use Link to navigate */}
-      </p>{" "}
+        Already have an account? <Link to="/login">Login here</Link>
+      </p>
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 
 const port = 3000;
 
-const Header = ({ handleLogout, history }) => {
+const Header = ({ handleLogout }) => {
   const [showMobileNav, setShowMobileNav] = useState(false);
   const [user_name, setUserName] = useState("");
   const [searchQuery, setSearchQuery] = useState(""); // State to store the search query
@@ -16,12 +16,6 @@ const Header = ({ handleLogout, history }) => {
 
   const handleLogoutClick = () => {
     handleLogout(); // Call the handleLogout function passed from the parent component
-  };
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-    // Redirect to the homepage with the search query as a URL parameter
-    navigate(`/homepage?search=${encodeURIComponent(searchQuery)}`);
   };
 
   useEffect(() => {
@@ -70,39 +64,11 @@ const Header = ({ handleLogout, history }) => {
             </button>
           </>
         ) : null}
-        {/* <div className="nav_item">
-          <button
-            type="button"
-            onClick={handleSearchSubmit}
-            className="nav_itemFavorites"
-          >
-            Search
-          </button>
-        </div> */}
-        <div className="header_nav">
         <div className="nav_item">
-          <Link to="/favorites" className="nav_itemFavorites">
+          <Link to="/homepage" className="nav_itemFavorites">
             Search
           </Link>
         </div>
-  {user_name ? (
-    <>
-      <span className="nav_itemLine1">Welcome, {user_name}!</span>
-      <button className="nav_itemLine1" onClick={handleLogoutClick}>
-        Logout
-      </button>
-    </>
-  ) : null}
-  <div className="nav_item">
-    <button
-      type="button"
-      onClick={handleSearchSubmit}
-      className="nav_itemFavorites"
-    >
-      Search
-    </button>
-  </div>
-</div>
       </div>
 
       {/* Mobile Navigation Toggle */}

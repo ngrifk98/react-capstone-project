@@ -1,12 +1,15 @@
 const express = require('express');
+// const { createProxyMiddleware} = require('http-proxy-middleware');
 const { Pool } = require('pg');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const path = require('path'); // Import the 'path' module
-const cors = require("cors");
-
 const app = express();
-const port = 3000; // Choose a port for your API
+const port = 4000; 
+// const apiProxy = createProxyMiddleware({
+//   target: 'https://localhost:4000',
+//   changeOrigin: true,
+//   secure: false, // You may want to set this to false if you are targeting localhost with HTTPS
+// });
 
 // Create a PostgreSQL pool
 const pool = new Pool({
@@ -30,7 +33,7 @@ app.use(
 
 // Middleware to parse JSON requests
 app.use(express.json());
-app.use(cors());
+// app.use('/', apiProxy);
 
 // Serve static files from the 'public' directory (where your React build files are)
 // app.use(express.static(path.join(__dirname, '../public')));
@@ -41,7 +44,7 @@ app.use(cors());
 // });
 
 // API REGISTRATION
-app.post('/registerApi', async (req, res) => {
+app.post('/api/registerApi', async (req, res) => {
   const { login_id, user_name, password, email_id } = req.body; // Assuming you send the insert values as JSON in the request body
 
   try {
@@ -73,7 +76,7 @@ app.post('/registerApi', async (req, res) => {
 });
 
 // API LOGIN
-app.post('/loginApi', async (req, res) => {
+app.post('/api/loginApi', async (req, res) => {
   const { login_id, password } = req.body;
 
   try {

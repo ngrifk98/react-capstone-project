@@ -61,7 +61,7 @@ function Homepage() {
     }
 
     // Fetch the user_name from the server when the component mounts
-    fetch("/api/NGKast") // Replace with your server endpoint
+    fetch("/api/loginApi") // Replace with your server endpoint
       .then((response) => {
         if (response.ok) {
           return response.json();

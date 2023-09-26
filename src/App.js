@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import LoginPage from "./components/LoginPage";
 import RegistrationPage from "./components/RegistrationPage";
 import HomePage from "./components/Homepage";
-import Header from "./components/Header"; // Import the Header component
-import Footer from "./components/Footer"; // Import the Footer component
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Favorites from "./components/Favorites";
-// const { sequelize } = require('./util/database'); // Adjust the relative path
 
 function App() {
+  // Define your state and logic, including the playSelectedEpisode function
+  const [savedEpisodes, setSavedEpisodes] = useState([]);
+
+  // Function to add a saved episode
+  const addSavedEpisode = (episode) => {
+    // Create a copy of the current saved episodes array and add the new episode
+    const updatedEpisodes = [...savedEpisodes, episode];
+    setSavedEpisodes(updatedEpisodes);
+  };
+
+
   return (
     <Router>
       <div className="App">
-        <Header /> {/* Render the Header component */}
+        <Header />
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -22,16 +32,21 @@ function App() {
             path="/homepage"
             element={<HomePage />} // Pass user_name
           />
-          <Route path="/favorites" element={<Favorites/>} />
-
-          {/* Add more routes as needed */}
+          <Route
+            path="/favorites"
+            element={
+              <Favorites
+                savedEpisodes={savedEpisodes}
+                addSavedEpisode={addSavedEpisode}
+              />
+            }
+          />
+          
         </Routes>
-        <Footer /> {/* Render the Footer component */}
+        <Footer />
       </div>
     </Router>
   );
 }
-
-// sequelize.sync();
 
 export default App;

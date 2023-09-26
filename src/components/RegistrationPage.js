@@ -4,11 +4,11 @@ import "./RegistrationPage.css";
 
 function RegistrationPage() {
   const [registration, setRegistration] = useState({
-    login_id: '',
-    user_name: '',
-    password: '',
-    retypePassword: '',
-    email: ''
+    login_id: "",
+    user_name: "",
+    password: "",
+    retypePassword: "",
+    email: "",
   });
 
   const [error, setError] = useState(""); // State for error message
@@ -34,48 +34,56 @@ function RegistrationPage() {
       }
     }
 
+    // Check if passwords match
+    if (registration.password !== registration.retypePassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
     // Create an object with the registration data
     const registrationData = {
-      login_id: registration.login_id, 
+      login_id: registration.login_id,
       user_name: registration.user_name,
       password: registration.password,
-      email_id: registration.email
+      email_id: registration.email,
     };
 
     try {
       // Send a POST request to your server with the registration data
-      const response = await fetch('http://localhost:3000/registerApi', {
-        method: 'POST',
+      const response = await fetch("/api/registerApi", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(registrationData),
       });
 
       if (response.ok) {
         // User registered successfully, you can handle this as needed
-        console.log('User registered successfully');
+        console.log("User registered successfully");
 
         // Reset the form fields after successful registration
         setRegistration({
-          login_id: '',
-          user_name: '',
-          password: '',
-          retypePassword: '',
-          email: ''
+          login_id: "",
+          user_name: "",
+          password: "",
+          retypePassword: "",
+          email: "",
         });
 
         // Clear the error message
         setError("");
 
         // Navigate the user to a success page or the login page
-        navigate('/login');
+        navigate("/login");
       } else {
         // Handle registration failure
-        console.error('Failed to register user');
+        const responseBody = await response.json();
+        setError(responseBody.error || "Failed to register user");
       }
     } catch (error) {
-      console.error('Error registering user:', error);
+      console.error("Error registering user:", error);
+      setError("An error occurred while registering.");
     }
   };
 

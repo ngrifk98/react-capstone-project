@@ -1,19 +1,32 @@
 import React, { useState, useEffect } from "react";
 import "./Favorites.css";
+import PodcastPlayback from "./PodcastPlayback";
 
 function Favorites() {
   const [savedEpisodes, setSavedEpisodes] = useState([]);
-  const [removeConfirmation, setRemoveConfirmation] = useState(""); // State for remove confirmation message
+  const [removeConfirmation, setRemoveConfirmation] = useState("");
+  const [currentEpisode, setCurrentEpisode] = useState(null);
+
+  const playEpisode = (episode) => {
+    // Set the currently playing episode
+    setCurrentEpisode(episode);
+
+    // You can also add logic to save the playback progress here
+    // For example, store the current playback time in the episode object
+  };
 
   useEffect(() => {
     // Retrieve the user's saved episodes from local storage
-    const savedEpisodesData = JSON.parse(localStorage.getItem("savedEpisodes")) || [];
+    const savedEpisodesData =
+      JSON.parse(localStorage.getItem("savedEpisodes")) || [];
     setSavedEpisodes(savedEpisodesData);
   }, []);
 
   const removeEpisode = (trackId) => {
     // Filter out the episode with the given trackId from the savedEpisodes list
-    const updatedEpisodes = savedEpisodes.filter((episode) => episode.trackId !== trackId);
+    const updatedEpisodes = savedEpisodes.filter(
+      (episode) => episode.trackId !== trackId
+    );
 
     // Update the state with the filtered list
     setSavedEpisodes(updatedEpisodes);
@@ -33,7 +46,6 @@ function Favorites() {
   return (
     <div className="favorites">
       <h2>Your Favorites</h2>
-      {/* Display remove confirmation message */}
       {removeConfirmation && (
         <p className="remove-confirmation">{removeConfirmation}</p>
       )}
@@ -45,10 +57,18 @@ function Favorites() {
               <source src={episode.previewUrl} type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
-            <button onClick={() => removeEpisode(episode.trackId)}>Remove</button>
+            <button onClick={() => removeEpisode(episode.trackId)}>
+              Remove
+            </button>
           </li>
         ))}
       </ul>
+
+      {/* Pass the currently playing episode and playEpisode function to PodcastPlayback */}
+      <PodcastPlayback
+        selectedEpisode={currentEpisode}
+        playEpisode={playEpisode}
+      />
     </div>
   );
 }

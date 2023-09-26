@@ -95,3 +95,9 @@
 audio {
   width: 100%;
 }
+
+.bookmark-confirmation {
+  font-size: 1rem;
+  color: #33cc33; /* Green color for confirmation message */
+  margin-top: 0.5rem;
+}

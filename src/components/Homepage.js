@@ -8,8 +8,46 @@ function Homepage() {
   const [searchResults, setSearchResults] = useState([]);
   const [user_name, setUser_name] = useState(""); // State to store user_name
   const [selectedPodcast, setSelectedPodcast] = useState(null); // State to store the selected podcast and its episodes
+  const [bookmarkConfirmation, setBookmarkConfirmation] = useState(""); // State for bookmark confirmation message
 
   const episodesRef = useRef(null); // Create a ref for the episodes dropdown
+
+  const handleBookmarkClick = (episode) => {
+    // You can save the episode URL to the server or local storage here
+    // For this example, we'll save it to local storage
+
+    // Get the user's saved episodes from local storage or initialize an empty array
+    const savedEpisodes =
+      JSON.parse(localStorage.getItem("savedEpisodes")) || [];
+
+    // Check if the episode is already bookmarked
+    const isAlreadyBookmarked = savedEpisodes.some(
+      (savedEpisode) => savedEpisode.trackId === episode.trackId
+    );
+
+    if (!isAlreadyBookmarked) {
+      // Add the episode to the saved episodes list
+      savedEpisodes.push({
+        trackId: episode.trackId,
+        trackName: episode.trackName,
+        previewUrl: episode.previewUrl,
+      });
+
+      // Save the updated list to local storage
+      localStorage.setItem("savedEpisodes", JSON.stringify(savedEpisodes));
+
+      // Provide feedback to the user that the episode is bookmarked
+      setBookmarkConfirmation("Episode bookmarked!");
+    } else {
+      // Provide feedback that the episode is already bookmarked
+      setBookmarkConfirmation("Episode is already bookmarked.");
+    }
+
+    // Clear the confirmation message after a delay (e.g., 3 seconds)
+    setTimeout(() => {
+      setBookmarkConfirmation("");
+    }, 3000); // 3000 milliseconds (3 seconds)
+  };
 
   useEffect(() => {
     // Retrieve the user_name from the cookie
@@ -95,7 +133,9 @@ function Homepage() {
 
   return (
     <div className="homepage">
-      <h2 className="welcome-text">Welcome, {user_name || "Guest"} to NGKast</h2>
+      <h2 className="welcome-text">
+        Welcome, {user_name || "Guest"} to NGKast
+      </h2>
       <div className="search-bar">
         <input
           type="text"
@@ -129,6 +169,8 @@ function Homepage() {
           </ul>
         </div>
       )}
+      {/* Display bookmark confirmation message */}
+      {bookmarkConfirmation && <p className="bookmark-confirmation">{bookmarkConfirmation}</p>}
       {/* Display episodes dropdown */}
       {selectedPodcast && (
         <div className="podcast-episodes" ref={episodesRef}>
@@ -141,11 +183,15 @@ function Homepage() {
                   <source src={episode.previewUrl} type="audio/mpeg" />
                   Your browser does not support the audio element.
                 </audio>
+                <button onClick={() => handleBookmarkClick(episode)}>
+                  Bookmark
+                </button>
               </li>
             ))}
           </ul>
         </div>
       )}
+      
       {/* Link to the Favorites page */}
       <Link to="/favorites">View Favorites</Link>
     </div>

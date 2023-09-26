@@ -6,7 +6,7 @@ const path = require('path'); // Import the 'path' module
 const cors = require("cors");
 
 const app = express();
-const port = 3001; // Choose a port for your API
+const port = 3000; // Choose a port for your API
 
 // Create a PostgreSQL pool
 const pool = new Pool({

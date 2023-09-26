@@ -3,15 +3,23 @@
 .homepage {
   padding: 2rem;
   text-align: center;
+  background-color: #8a2be2; /* Violet background color */
+  color: #fff; /* White text color for the main content */
 }
 
 .homepage h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #333; /* Dark text color */
+  color: #fff; /* White text color */
 }
 
 /* Add music-themed styles */
+.welcome-text {
+  font-family: 'Orbitron', sans-serif; /* Use the 'Orbitron' font */
+  font-size: 2rem;
+  color: #fff; /* White text color */
+}
+
 .music-theme {
   background-color: #f5f5f5; /* Light gray background */
   padding: 1rem;
@@ -39,8 +47,6 @@
   background-color: #ff4500; /* Darker orange on hover */
 }
 
-/* Add more homepage styles as needed */
-
 /* Style for podcast items */
 .search-results {
   margin-top: 2rem;
@@ -55,6 +61,7 @@
   border-radius: 5px;
   background-color: #fff;
   position: relative; /* Add this for positioning */
+  color: #000; /* Black text color for search results */
 }
 
 .podcast-image img {
@@ -74,13 +81,14 @@
   margin: 0;
 }
 
-/* Style for the episodes dropdown */
+/* Style for the podcast episodes dropdown */
 .podcast-episodes {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #000; /* Black text color for podcast episodes */
 }
 
 /* Style for the audio player */

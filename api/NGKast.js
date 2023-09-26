@@ -2,9 +2,11 @@ const express = require('express');
 const { Pool } = require('pg');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const path = require('path'); // Import the 'path' module
+const cors = require("cors");
 
 const app = express();
-const port = 3000; // Choose a port for your API
+const port = 3001; // Choose a port for your API
 
 // Create a PostgreSQL pool
 const pool = new Pool({
@@ -28,6 +30,15 @@ app.use(
 
 // Middleware to parse JSON requests
 app.use(express.json());
+app.use(cors());
+
+// Serve static files from the 'public' directory (where your React build files are)
+// app.use(express.static(path.join(__dirname, '../public')));
+
+// Define a wildcard route (*) to serve your React app's HTML file
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
 
 // API REGISTRATION
 app.post('/registerApi', async (req, res) => {
@@ -97,6 +108,7 @@ app.post('/loginApi', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 // Start the server
 app.listen(port, () => {

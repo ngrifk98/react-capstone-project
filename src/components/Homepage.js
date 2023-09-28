@@ -183,7 +183,7 @@ const handlePodcastClick = async (podcast) => {
   return (
     <div className="homepage">
       <h2 className="welcome-text">
-        Welcome, {user_name || "Guest"} to NGKast
+        Welcome, {user_name || "Guest"}
       </h2>
       <div className="search-bar">
         <input

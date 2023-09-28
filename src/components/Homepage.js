@@ -107,29 +107,78 @@ function Homepage() {
     }
   };
 
-  const handlePodcastClick = async (podcast) => {
+  // ...
+
+const fetchEpisodeDescriptions = async (episodes) => {
+  const episodesWithDescriptions = [];
+
+  for (const episode of episodes) {
     try {
       const response = await fetch(
-        `https://itunes.apple.com/lookup?id=${podcast.collectionId}&entity=podcastEpisode`
+        `https://itunes.apple.com/lookup?id=${episode.collectionId}&entity=podcastEpisode`
       );
+
       if (response.ok) {
         const data = await response.json();
-        setSelectedPodcast({
-          ...podcast,
-          episodes: data.results,
-        });
 
-        // Scroll to the episodes dropdown when a podcast is selected
-        if (episodesRef.current) {
-          episodesRef.current.scrollIntoView({ behavior: "smooth" });
+        if (data.results && data.results[0] && data.results[0].description) {
+          // Retrieve the description and limit it to 100 characters
+          const description = data.results[0].description.substring(0, 100);
+          const episodeWithDescription = {
+            ...episode,
+            description,
+          };
+          episodesWithDescriptions.push(episodeWithDescription);
+        } else {
+          // If description is not available, provide a default message
+          const episodeWithDescription = {
+            ...episode,
+            description: "Description not available",
+          };
+          episodesWithDescriptions.push(episodeWithDescription);
         }
       } else {
-        console.error("Failed to fetch podcast episodes");
+        console.error("Failed to fetch episode description");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error fetching episode description:", error);
     }
-  };
+  }
+
+  return episodesWithDescriptions;
+};
+
+// ...
+
+const handlePodcastClick = async (podcast) => {
+  try {
+    const response = await fetch(
+      `https://itunes.apple.com/lookup?id=${podcast.collectionId}&entity=podcastEpisode`
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      const episodesWithDescriptions = await fetchEpisodeDescriptions(
+        data.results
+      );
+
+      setSelectedPodcast({
+        ...podcast,
+        episodes: episodesWithDescriptions,
+      });
+
+      // Scroll to the episodes dropdown when a podcast is selected
+      if (episodesRef.current) {
+        episodesRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      console.error("Failed to fetch podcast episodes");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
 
   return (
     <div className="homepage">
@@ -170,7 +219,9 @@ function Homepage() {
         </div>
       )}
       {/* Display bookmark confirmation message */}
-      {bookmarkConfirmation && <p className="bookmark-confirmation">{bookmarkConfirmation}</p>}
+      {bookmarkConfirmation && (
+        <p className="bookmark-confirmation">{bookmarkConfirmation}</p>
+      )}
       {/* Display episodes dropdown */}
       {selectedPodcast && (
         <div className="podcast-episodes" ref={episodesRef}>
@@ -179,6 +230,7 @@ function Homepage() {
             {selectedPodcast.episodes.map((episode) => (
               <li key={episode.trackId}>
                 <h5>{episode.trackName}</h5>
+                <p>{episode.description}</p> {/* Display episode description */}
                 <audio controls>
                   <source src={episode.previewUrl} type="audio/mpeg" />
                   Your browser does not support the audio element.
@@ -191,7 +243,7 @@ function Homepage() {
           </ul>
         </div>
       )}
-      
+
       {/* Link to the Favorites page */}
       <Link to="/favorites">View Favorites</Link>
     </div>

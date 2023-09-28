@@ -1,59 +1,101 @@
 /* LoginPage.css */
 
 .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 50px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  .form-group {
-    margin: 10px 0;
-  }
-  
-  label {
-    font-weight: bold;
-  }
-  
-  input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    width: 100%;
-  }
-  
-  .login-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-top: 15px;
-  }
-  
-  .login-button:hover {
-    background-color: #0056b3;
-  }
-  
-  p {
-    margin-top: 10px;
-  }
-  
-  .error-message {
-    color: red;
-    font-weight: bold;
-    margin-top: 10px; /* Optional spacing from other elements */
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #9c5dc0; /* Soft purple background color */
+  color: #fff; /* White text color for the main content */
+  text-align: center;
+  transition: background-color 0.3s ease; /* Add a transition for background-color */
+  font-family: 'Orbitron', sans-serif; /* Apply the 'Orbitron' font */
+}
+
+
+.login-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #fff; /* White text color */
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+}
+
+.form-group {
+  margin: 10px 0;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.login-button {
+  background-color: #ff6600; /* Orange button background */
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+.login-button:hover {
+  background-color: #ff4500; /* Darker orange on hover */
+}
+
+p {
+  margin-top: 10px;
+}
+
+.error-message {
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Add music-themed styles */
+.music-theme {
+  background-color: #f5f5f5; /* Light gray background */
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a card-like effect */
+}
+
+.music-theme p {
+  font-size: 1.2rem;
+  color: #666; /* Slightly darker text color */
+}
+
+.music-theme button {
+  background-color: #ff6600; /* Orange button background */
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+.music-theme button:hover {
+  background-color: #ff4500; /* Darker orange on hover */
+}

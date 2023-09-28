@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-capstone-project/static/css/main.19a913ad.css",
-    "main.js": "/react-capstone-project/static/js/main.c034652a.js",
-    "static/js/787.d6c3c803.chunk.js": "/react-capstone-project/static/js/787.d6c3c803.chunk.js",
-    "index.html": "/react-capstone-project/index.html",
-    "main.19a913ad.css.map": "/react-capstone-project/static/css/main.19a913ad.css.map",
-    "main.c034652a.js.map": "/react-capstone-project/static/js/main.c034652a.js.map",
-    "787.d6c3c803.chunk.js.map": "/react-capstone-project/static/js/787.d6c3c803.chunk.js.map"
+    "main.css": "/homepage/static/css/main.19a913ad.css",
+    "main.js": "/homepage/static/js/main.2d6ceefe.js",
+    "static/js/787.d6c3c803.chunk.js": "/homepage/static/js/787.d6c3c803.chunk.js",
+    "index.html": "/homepage/index.html",
+    "main.19a913ad.css.map": "/homepage/static/css/main.19a913ad.css.map",
+    "main.2d6ceefe.js.map": "/homepage/static/js/main.2d6ceefe.js.map",
+    "787.d6c3c803.chunk.js.map": "/homepage/static/js/787.d6c3c803.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.19a913ad.css",
-    "static/js/main.c034652a.js"
+    "static/js/main.2d6ceefe.js"
   ]
 }

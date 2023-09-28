@@ -10,9 +10,6 @@ function Favorites() {
   const playEpisode = (episode) => {
     // Set the currently playing episode
     setCurrentEpisode(episode);
-
-    // You can also add logic to save the playback progress here
-    // For example, store the current playback time in the episode object
   };
 
   useEffect(() => {

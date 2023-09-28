@@ -1,5 +1,7 @@
 # NGKast - Podcast Discovery Website
 
+![NGKast Logo](ngkast\public\images\NGKast_Logo.png)
+
 Welcome to NGKast, a podcast discovery website that allows users to explore, listen to, and share their favorite podcasts. NGKast is built with a combination of technologies, including React for the front end, Node.js for the back end, and PostgreSQL for the database.
 
 ## Overview
